@@ -1,0 +1,75 @@
+# Retail Order Query Chatbot - Agent Configuration
+
+version: "1.0"
+
+# Router Agent (Intent Classifier)
+router:
+  name: "RouterAgent"
+  description: "Classifies customer intent and routes to appropriate agent"
+  temperature: 0.2
+  intents:
+    - product_query
+    - order_status
+    - recommendation
+    - return_request
+    - cart_help
+    - checkout_help
+    - general_inquiry
+
+# Specialized Agents
+agents:
+  product:
+    name: "ProductAgent"
+    description: "Handles product queries, searches, and comparisons"
+    temperature: 0.3
+    capabilities:
+      - Search products
+      - Check availability
+      - Compare products
+      - Provide specifications
+  
+  order:
+    name: "OrderAgent"
+    description: "Manages order tracking and status inquiries"
+    temperature: 0.2
+    capabilities:
+      - Track orders
+      - Estimate delivery
+      - Provide shipping updates
+      - Set up notifications
+  
+  recommendation:
+    name: "RecommendationAgent"
+    description: "Provides personalized product recommendations"
+    temperature: 0.5
+    capabilities:
+      - Similar products
+      - Personalized suggestions
+      - Cross-sell items
+      - Trending products
+  
+  support:
+    name: "SupportAgent"
+    description: "Handles returns, refunds, and complaints"
+    temperature: 0.3
+    capabilities:
+      - Process returns
+      - Handle refunds
+      - Manage exchanges
+      - Create support tickets
+  
+  checkout:
+    name: "CheckoutAgent"
+    description: "Assists with cart and checkout"
+    temperature: 0.3
+    capabilities:
+      - Manage cart
+      - Apply coupons
+      - Shipping options
+      - Checkout assistance
+
+# Agent Orchestration
+orchestration:
+  max_iterations: 15
+  timeout_seconds: 60
+  fallback_agent: "ProductAgent"

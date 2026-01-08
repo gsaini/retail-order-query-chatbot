@@ -1,0 +1,50 @@
+# Retail Order Query Chatbot - Channel Configuration
+
+channels:
+  web:
+    enabled: true
+    name: "Web Chat"
+    settings:
+      widget_position: "bottom-right"
+      auto_greeting: true
+      greeting_message: "👋 Hi! How can I help you today?"
+  
+  whatsapp:
+    enabled: false
+    name: "WhatsApp Business"
+    settings:
+      phone_number_id: "${WHATSAPP_PHONE_NUMBER_ID}"
+      access_token: "${WHATSAPP_ACCESS_TOKEN}"
+      webhook_verify_token: "${WHATSAPP_VERIFY_TOKEN}"
+  
+  facebook:
+    enabled: false
+    name: "Facebook Messenger"
+    settings:
+      page_access_token: "${FACEBOOK_PAGE_ACCESS_TOKEN}"
+      app_secret: "${FACEBOOK_APP_SECRET}"
+  
+  sms:
+    enabled: false
+    name: "SMS"
+    settings:
+      provider: "twilio"
+      account_sid: "${TWILIO_ACCOUNT_SID}"
+      auth_token: "${TWILIO_AUTH_TOKEN}"
+
+# Channel-specific behavior
+behavior:
+  response_format:
+    web: "rich"     # Supports cards, buttons, images
+    whatsapp: "text" # Limited to text with some formatting
+    facebook: "rich"
+    sms: "plain"
+  
+  max_message_length:
+    web: 4000
+    whatsapp: 4096
+    facebook: 2000
+    sms: 160
+  
+  typing_indicator: true
+  read_receipts: true
